@@ -35,6 +35,19 @@ https://dev.mysql.com/downloads/workbench/
 
 https://dev.mysql.com/downloads/connector/cpp/
 
+### CodeBlocks
+
+http://www.codeblocks.org/downloads/26#linux
+
+#### setup
+1. Project -> Build Options... -> Compiler Settings -> Compiler Flags (-std=c++11, -static-libstdc++)
+1. Project -> Build Options... -> Linker Settings -> Link libraries: -> Add -> "include all files in project lib folder"
+1. Project -> Build Options... -> Linker Settings -> Other linker options: -> (-lmysqlcppconn8, -lxerces-c
+, -lxerces-c-3.2, -lpthread, -lssl, -lcrypto)
+1. Project -> Build Options... -> Search directories -> Compiler -> Add -> (include)
+1. 1. Project -> Build Options... -> Search directories -> Linker -> Add -> (lib)
+
+
 ## Resources
 
 https://en.cppreference.com/w/cpp

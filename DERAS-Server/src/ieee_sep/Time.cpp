@@ -63,6 +63,7 @@ boost::property_tree::ptree Time::serialize()
     pt.put("Time.dstStartTime", dstStartTime);
     pt.put("Time.localTime", localTime);
     pt.put("Time.quality", quality);
+    pt.put("Time.quality2", quality);
     pt.put("Time.tzOffset", tzOffset);
     return pt;
 }

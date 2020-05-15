@@ -1,20 +1,23 @@
 # depslib dependency file v1.0
-1589389670 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/main.cpp
+1589568426 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/main.cpp
+	"ieee_sep/Time.h"
+	"MySqlDatabase.h"
+	"XercesXml.h"
 	"boost/beast/ssl/server_certificate.hpp"
 	<boost/beast/core.hpp>
 	<boost/beast/http.hpp>
 	<boost/beast/ssl.hpp>
 	<boost/beast/version.hpp>
-	<boost/asio/ip/tcp.hpp>
-	<boost/asio/ssl/stream.hpp>
+	<boost/asio/strand.hpp>
 	<boost/config.hpp>
+	<algorithm>
 	<cstdlib>
+	<functional>
 	<iostream>
 	<memory>
 	<string>
 	<thread>
-	"ieee_sep/Time.h"
-	"MySqlDatabase.h"
+	<vector>
 
 1588944743 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/mysql-cppconn-8/mysqlx/xdevapi.h
 	"devapi/common.h"
@@ -348,7 +351,7 @@
 	"../crud.h"
 	<set>
 
-1589215520 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/ieee_sep/Time.cpp
+1589569915 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/ieee_sep/Time.cpp
 	<iostream>
 	"ieee_sep/Time.h"
 	"boost/date_time/time_zone_base.hpp"
@@ -14149,4 +14152,931 @@
 1589481454 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/MySqlDatabase.h
 	<string>
 	<mysqlx/xdevapi.h>
+
+1589481947 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/MySqlDatabase.cpp
+	<iostream>
+	"MySqlDatabase.h"
+
+1575937112 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/asio/strand.hpp
+	<boost/asio/detail/config.hpp>
+	<boost/asio/detail/strand_executor_service.hpp>
+	<boost/asio/detail/type_traits.hpp>
+	<boost/asio/detail/push_options.hpp>
+	<boost/asio/detail/pop_options.hpp>
+	<boost/asio/io_context_strand.hpp>
+
+1575937112 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/asio/detail/strand_executor_service.hpp
+	<boost/asio/detail/config.hpp>
+	<boost/asio/detail/atomic_count.hpp>
+	<boost/asio/detail/executor_op.hpp>
+	<boost/asio/detail/memory.hpp>
+	<boost/asio/detail/mutex.hpp>
+	<boost/asio/detail/op_queue.hpp>
+	<boost/asio/detail/scheduler_operation.hpp>
+	<boost/asio/detail/scoped_ptr.hpp>
+	<boost/asio/execution_context.hpp>
+	<boost/asio/detail/push_options.hpp>
+	<boost/asio/detail/pop_options.hpp>
+	<boost/asio/detail/impl/strand_executor_service.hpp>
+	<boost/asio/detail/impl/strand_executor_service.ipp>
+
+1575937112 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/asio/detail/impl/strand_executor_service.hpp
+	<boost/asio/detail/call_stack.hpp>
+	<boost/asio/detail/fenced_block.hpp>
+	<boost/asio/detail/handler_invoke_helpers.hpp>
+	<boost/asio/detail/recycling_allocator.hpp>
+	<boost/asio/executor_work_guard.hpp>
+	<boost/asio/detail/push_options.hpp>
+	<boost/asio/detail/pop_options.hpp>
+
+1575937112 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/asio/detail/impl/strand_executor_service.ipp
+	<boost/asio/detail/config.hpp>
+	<boost/asio/detail/strand_executor_service.hpp>
+	<boost/asio/detail/push_options.hpp>
+	<boost/asio/detail/pop_options.hpp>
+
+1589569566 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/DOMTreeErrorReporter.cpp
+	<xercesc/sax/SAXParseException.hpp>
+	"DOMTreeErrorReporter.hpp"
+	<iostream>
+	<iostream.h>
+	<stdlib.h>
+	<string.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/sax/SAXParseException.hpp
+	<xercesc/sax/SAXException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/sax/SAXException.hpp
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/XMLUni.hpp>
+	<xercesc/util/XMemory.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLString.hpp
+	<xercesc/util/BaseRefVectorOf.hpp>
+	<xercesc/framework/XMLBuffer.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<string.h>
+	<assert.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/BaseRefVectorOf.hpp
+	<xercesc/util/ArrayIndexOutOfBoundsException.hpp>
+	<xercesc/util/XMLEnumerator.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<xercesc/util/BaseRefVectorOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/ArrayIndexOutOfBoundsException.hpp
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/XMLExceptMsgs.hpp>
+	<xercesc/util/XMLUni.hpp>
+	<xercesc/framework/XMLErrorReporter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XercesDefs.hpp
+	<xercesc/util/Xerces_autoconf_config.hpp>
+	<xercesc/util/XercesVersion.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/Xerces_autoconf_config.hpp
+	<cstdint>
+	<stdint.h>
+	<inttypes.h>
+	<sys/types.h>
+	<wchar.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XercesVersion.hpp
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMemory.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<stdlib.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLExceptMsgs.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMError.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMError.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLUni.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLErrorReporter.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLEnumerator.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/PlatformUtils.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+	<xercesc/util/PanicHandler.hpp>
+	<xercesc/util/XMLFileMgr.hpp>
+	<xercesc/util/XMLMutexMgr.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/PanicHandler.hpp
+	<xercesc/util/XMemory.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLFileMgr.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMemory.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLMutexMgr.hpp
+	<xercesc/util/XMemory.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/MemoryManager.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<stdlib.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/BaseRefVectorOf.c
+	<xercesc/util/BaseRefVectorOf.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLBuffer.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<string.h>
+
+1589569575 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/DOMTreeErrorReporter.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/sax/ErrorHandler.hpp>
+	<iostream>
+	<iostream.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/sax/ErrorHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1589569696 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/XercesXml.h
+	<string>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/dom/DOM.hpp>
+	<xercesc/framework/MemBufInputSource.hpp>
+	<xercesc/framework/StdOutFormatTarget.hpp>
+	<xercesc/framework/LocalFileFormatTarget.hpp>
+	<xercesc/parsers/XercesDOMParser.hpp>
+	<xercesc/util/XMLUni.hpp>
+	"DOMTreeErrorReporter.hpp"
+	<xercesc/util/OutOfMemoryException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOM.hpp
+	<xercesc/dom/DOMAttr.hpp>
+	<xercesc/dom/DOMCDATASection.hpp>
+	<xercesc/dom/DOMCharacterData.hpp>
+	<xercesc/dom/DOMComment.hpp>
+	<xercesc/dom/DOMDocument.hpp>
+	<xercesc/dom/DOMDocumentFragment.hpp>
+	<xercesc/dom/DOMDocumentType.hpp>
+	<xercesc/dom/DOMElement.hpp>
+	<xercesc/dom/DOMEntity.hpp>
+	<xercesc/dom/DOMEntityReference.hpp>
+	<xercesc/dom/DOMException.hpp>
+	<xercesc/dom/DOMImplementation.hpp>
+	<xercesc/dom/DOMNamedNodeMap.hpp>
+	<xercesc/dom/DOMNode.hpp>
+	<xercesc/dom/DOMNodeList.hpp>
+	<xercesc/dom/DOMNotation.hpp>
+	<xercesc/dom/DOMProcessingInstruction.hpp>
+	<xercesc/dom/DOMText.hpp>
+	<xercesc/dom/DOMDocumentRange.hpp>
+	<xercesc/dom/DOMDocumentTraversal.hpp>
+	<xercesc/dom/DOMNodeFilter.hpp>
+	<xercesc/dom/DOMNodeIterator.hpp>
+	<xercesc/dom/DOMRange.hpp>
+	<xercesc/dom/DOMRangeException.hpp>
+	<xercesc/dom/DOMTreeWalker.hpp>
+	<xercesc/dom/DOMLSParser.hpp>
+	<xercesc/dom/DOMLSParserFilter.hpp>
+	<xercesc/dom/DOMConfiguration.hpp>
+	<xercesc/dom/DOMLSResourceResolver.hpp>
+	<xercesc/dom/DOMError.hpp>
+	<xercesc/dom/DOMErrorHandler.hpp>
+	<xercesc/dom/DOMImplementationLS.hpp>
+	<xercesc/dom/DOMImplementationList.hpp>
+	<xercesc/dom/DOMImplementationRegistry.hpp>
+	<xercesc/dom/DOMImplementationSource.hpp>
+	<xercesc/dom/DOMLSInput.hpp>
+	<xercesc/dom/DOMLSOutput.hpp>
+	<xercesc/dom/DOMLocator.hpp>
+	<xercesc/dom/DOMPSVITypeInfo.hpp>
+	<xercesc/dom/DOMStringList.hpp>
+	<xercesc/dom/DOMTypeInfo.hpp>
+	<xercesc/dom/DOMUserDataHandler.hpp>
+	<xercesc/dom/DOMLSSerializer.hpp>
+	<xercesc/dom/DOMLSSerializerFilter.hpp>
+	<xercesc/dom/DOMXPathEvaluator.hpp>
+	<xercesc/dom/DOMXPathNSResolver.hpp>
+	<xercesc/dom/DOMXPathException.hpp>
+	<xercesc/dom/DOMXPathExpression.hpp>
+	<xercesc/dom/DOMXPathResult.hpp>
+	<xercesc/dom/DOMXPathNamespace.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMAttr.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNode.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMCDATASection.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMText.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMText.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMCharacterData.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMCharacterData.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMComment.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMCharacterData.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMDocument.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+	<xercesc/dom/DOMDocumentRange.hpp>
+	<xercesc/dom/DOMDocumentTraversal.hpp>
+	<xercesc/dom/DOMXPathEvaluator.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMDocumentRange.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMDocumentTraversal.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNodeFilter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNodeFilter.hpp
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathEvaluator.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMXPathResult.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathResult.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMDocumentFragment.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMDocumentType.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMElement.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMEntity.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMEntityReference.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMImplementation.hpp
+	<xercesc/dom/DOMImplementationLS.hpp>
+	<xercesc/dom/DOMException.hpp>
+	<xercesc/dom/DOMLSException.hpp>
+	<xercesc/dom/DOMRangeException.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMImplementationLS.hpp
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSException.hpp
+	<xercesc/dom/DOMException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMRangeException.hpp
+	<xercesc/dom/DOMException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNamedNodeMap.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNodeList.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNotation.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMProcessingInstruction.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMNodeIterator.hpp
+	<xercesc/dom/DOMNodeFilter.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMRange.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMTreeWalker.hpp
+	<xercesc/dom/DOMNode.hpp>
+	<xercesc/dom/DOMNodeFilter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSParser.hpp
+	<xercesc/dom/DOMConfiguration.hpp>
+	<xercesc/dom/DOMLSParserFilter.hpp>
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/validators/common/Grammar.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMConfiguration.hpp
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/RefVectorOf.hpp>
+	<xercesc/dom/DOMStringList.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefVectorOf.hpp
+	<xercesc/util/BaseRefVectorOf.hpp>
+	<xercesc/util/RefVectorOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefVectorOf.c
+	<xercesc/util/RefVectorOf.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMStringList.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSParserFilter.hpp
+	<xercesc/dom/DOMNodeFilter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/common/Grammar.hpp
+	<limits.h>
+	<xercesc/framework/XMLElementDecl.hpp>
+	<xercesc/framework/XMLEntityDecl.hpp>
+	<xercesc/framework/XMLNotationDecl.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLElementDecl.hpp
+	<xercesc/framework/XMLAttr.hpp>
+	<xercesc/framework/XMLAttDefList.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLAttr.hpp
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/QName.hpp>
+	<xercesc/framework/XMLAttDef.hpp>
+	<xercesc/validators/datatype/DatatypeValidator.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/QName.hpp
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/XMLUniDefs.hpp>
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/XMLUniDefs.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/internal/XSerializable.hpp
+	<xercesc/internal/XSerializeEngine.hpp>
+	<xercesc/internal/XProtoType.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/internal/XSerializeEngine.hpp
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/ValueVectorOf.hpp>
+	<xercesc/util/XMLExceptMsgs.hpp>
+	<xercesc/internal/XSerializationException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefHashTableOf.hpp
+	<xercesc/util/Hashers.hpp>
+	<xercesc/util/IllegalArgumentException.hpp>
+	<xercesc/util/NoSuchElementException.hpp>
+	<xercesc/util/RuntimeException.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<xercesc/util/RefHashTableOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/Hashers.hpp
+	<xercesc/util/XMLString.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/IllegalArgumentException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/NoSuchElementException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RuntimeException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefHashTableOf.c
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/Janitor.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/NullPointerException.hpp>
+	<new>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/Janitor.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<xercesc/util/Janitor.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/Janitor.c
+	<xercesc/util/Janitor.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/NullPointerException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/ValueVectorOf.hpp
+	<xercesc/util/ArrayIndexOutOfBoundsException.hpp>
+	<xercesc/util/XMLEnumerator.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/framework/MemoryManager.hpp>
+	<xercesc/util/ValueVectorOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/ValueVectorOf.c
+	<xercesc/util/ValueVectorOf.hpp>
+	<string.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/internal/XSerializationException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/internal/XProtoType.hpp
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLAttDef.hpp
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/XMemory.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/datatype/DatatypeValidator.hpp
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/KVStringPair.hpp>
+	<xercesc/util/XMLUniDefs.hpp>
+	<xercesc/util/regx/RegularExpression.hpp>
+	<xercesc/validators/schema/SchemaSymbols.hpp>
+	<xercesc/internal/XSerializable.hpp>
+	<xercesc/framework/psvi/XSSimpleTypeDefinition.hpp>
+	<xercesc/framework/ValidationContext.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/KVStringPair.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/RegularExpression.hpp
+	<xercesc/util/RefArrayVectorOf.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/Janitor.hpp>
+	<xercesc/util/regx/Op.hpp>
+	<xercesc/util/regx/TokenFactory.hpp>
+	<xercesc/util/regx/BMPattern.hpp>
+	<xercesc/util/regx/OpFactory.hpp>
+	<xercesc/util/regx/RegxUtil.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefArrayVectorOf.hpp
+	<xercesc/util/BaseRefVectorOf.hpp>
+	<xercesc/util/RefArrayVectorOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/RefArrayVectorOf.c
+	"RefArrayVectorOf.hpp"
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/Op.hpp
+	<xercesc/util/RefVectorOf.hpp>
+	<xercesc/util/RuntimeException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/TokenFactory.hpp
+	<xercesc/util/RefVectorOf.hpp>
+	<xercesc/util/regx/Token.hpp>
+	<xercesc/util/Mutexes.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/Token.hpp
+	<xercesc/util/RuntimeException.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/Mutexes.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/BMPattern.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/OpFactory.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/RefVectorOf.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/regx/RegxUtil.hpp
+	<xercesc/util/XMLUniDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/schema/SchemaSymbols.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/psvi/XSSimpleTypeDefinition.hpp
+	<xercesc/framework/psvi/XSTypeDefinition.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/psvi/XSTypeDefinition.hpp
+	<xercesc/framework/psvi/XSObject.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/psvi/XSObject.hpp
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/framework/psvi/XSConstants.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/psvi/XSConstants.hpp
+	<xercesc/util/RefVectorOf.hpp>
+	<xercesc/util/RefArrayVectorOf.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/ValidationContext.hpp
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/NameIdPool.hpp>
+	<xercesc/util/XMemory.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/NameIdPool.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/NameIdPool.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/NameIdPool.c
+	<xercesc/util/NameIdPool.hpp>
+	<xercesc/util/IllegalArgumentException.hpp>
+	<xercesc/util/NoSuchElementException.hpp>
+	<xercesc/util/RuntimeException.hpp>
+	<new>
+	<assert.h>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLAttDefList.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMemory.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLEntityDecl.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLNotationDecl.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/PlatformUtils.hpp>
+	<xercesc/util/XMLString.hpp>
+	<xercesc/internal/XSerializable.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSResourceResolver.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMErrorHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMImplementationList.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMImplementationRegistry.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMImplementationSource.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSInput.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSOutput.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLocator.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMPSVITypeInfo.hpp
+	<xercesc/util/XMLString.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMTypeInfo.hpp
+	<xercesc/util/XMLString.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMUserDataHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSSerializer.hpp
+	<xercesc/dom/DOMNode.hpp>
+	<xercesc/dom/DOMLSSerializerFilter.hpp>
+	<xercesc/dom/DOMErrorHandler.hpp>
+	<xercesc/dom/DOMConfiguration.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMLSSerializerFilter.hpp
+	<xercesc/dom/DOMNodeFilter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathNSResolver.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathException.hpp
+	<xercesc/dom/DOMException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathExpression.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/dom/DOMXPathResult.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/dom/DOMXPathNamespace.hpp
+	<xercesc/dom/DOMNode.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/MemBufInputSource.hpp
+	<xercesc/sax/InputSource.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/sax/InputSource.hpp
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/StdOutFormatTarget.hpp
+	<xercesc/framework/XMLFormatter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLFormatter.hpp
+	<xercesc/util/PlatformUtils.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/LocalFileFormatTarget.hpp
+	<xercesc/framework/XMLFormatter.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/parsers/XercesDOMParser.hpp
+	<xercesc/parsers/AbstractDOMParser.hpp>
+	<xercesc/validators/common/Grammar.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/parsers/AbstractDOMParser.hpp
+	<xercesc/dom/DOMDocument.hpp>
+	<xercesc/framework/XMLDocumentHandler.hpp>
+	<xercesc/framework/XMLErrorReporter.hpp>
+	<xercesc/framework/XMLEntityHandler.hpp>
+	<xercesc/util/SecurityManager.hpp>
+	<xercesc/util/ValueStackOf.hpp>
+	<xercesc/validators/DTD/DocTypeHandler.hpp>
+	<xercesc/dom/DOMDocumentType.hpp>
+	<xercesc/validators/DTD/DTDElementDecl.hpp>
+	<xercesc/framework/XMLBufferMgr.hpp>
+	<xercesc/framework/psvi/PSVIHandler.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLDocumentHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/RefVectorOf.hpp>
+	<xercesc/framework/XMLAttr.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLEntityHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/SecurityManager.hpp
+	<xercesc/util/XercesDefs.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/ValueStackOf.hpp
+	<xercesc/util/EmptyStackException.hpp>
+	<xercesc/util/ValueVectorOf.hpp>
+	<xercesc/util/ValueStackOf.c>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/EmptyStackException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMLException.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/ValueStackOf.c
+	<xercesc/util/ValueStackOf.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/DTD/DocTypeHandler.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/framework/XMLNotationDecl.hpp>
+	<xercesc/validators/DTD/DTDAttDef.hpp>
+	<xercesc/validators/DTD/DTDElementDecl.hpp>
+	<xercesc/validators/DTD/DTDEntityDecl.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/DTD/DTDAttDef.hpp
+	<xercesc/framework/XMLAttDef.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/DTD/DTDElementDecl.hpp
+	<xercesc/util/RefHashTableOf.hpp>
+	<xercesc/util/QName.hpp>
+	<xercesc/framework/XMLElementDecl.hpp>
+	<xercesc/framework/XMLContentModel.hpp>
+	<xercesc/validators/DTD/DTDAttDef.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLContentModel.hpp
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/QName.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/validators/DTD/DTDEntityDecl.hpp
+	<xercesc/framework/XMLEntityDecl.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/XMLBufferMgr.hpp
+	<xercesc/framework/XMLBuffer.hpp>
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/framework/psvi/PSVIHandler.hpp
+
+1587650826 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/xercesc/util/OutOfMemoryException.hpp
+	<xercesc/util/XercesDefs.hpp>
+	<xercesc/util/XMemory.hpp>
+	<xercesc/util/XMLExceptMsgs.hpp>
+	<xercesc/util/XMLUniDefs.hpp>
+
+1589569597 source:/home/tylor/Dev/DERAS-Server/DERAS-Server/src/XercesXml.cpp
+	<string>
+	<iostream>
+	"XercesXml.h"
+	"DOMTreeErrorReporter.hpp"
+	<boost/filesystem.hpp>
+	<boost/foreach.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem.hpp
+	<boost/filesystem/config.hpp>
+	<boost/filesystem/path.hpp>
+	<boost/filesystem/exception.hpp>
+	<boost/filesystem/directory.hpp>
+	<boost/filesystem/operations.hpp>
+	<boost/filesystem/file_status.hpp>
+	<boost/filesystem/convenience.hpp>
+	<boost/filesystem/string_file.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/config.hpp
+	<boost/config.hpp>
+	<boost/system/api_config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/config/auto_link.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/path.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/filesystem/path_traits.hpp>
+	<boost/system/error_code.hpp>
+	<boost/system/system_error.hpp>
+	<boost/iterator/iterator_facade.hpp>
+	<boost/iterator/iterator_categories.hpp>
+	<boost/core/enable_if.hpp>
+	<boost/io/detail/quoted_manip.hpp>
+	<boost/functional/hash_fwd.hpp>
+	<boost/type_traits/is_integral.hpp>
+	<string>
+	<iterator>
+	<cstring>
+	<iosfwd>
+	<stdexcept>
+	<cassert>
+	<locale>
+	<algorithm>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/path_traits.hpp
+	<boost/config.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/type_traits/is_array.hpp>
+	<boost/type_traits/decay.hpp>
+	<boost/system/error_code.hpp>
+	<boost/core/enable_if.hpp>
+	<cwchar>
+	<string>
+	<vector>
+	<list>
+	<iterator>
+	<locale>
+	<boost/assert.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937153 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/io/detail/quoted_manip.hpp
+	<iosfwd>
+	<ios>
+	<string>
+	<iterator>
+	<boost/io/ios_state.hpp>
+
+1575937124 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/functional/hash_fwd.hpp
+	<boost/container_hash/hash_fwd.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/exception.hpp
+	<boost/config.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/filesystem/path.hpp>
+	<string>
+	<boost/system/error_code.hpp>
+	<boost/system/system_error.hpp>
+	<boost/smart_ptr/intrusive_ptr.hpp>
+	<boost/smart_ptr/intrusive_ref_counter.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937192 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/smart_ptr/intrusive_ptr.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/smart_ptr/detail/sp_convertible.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/smart_ptr/detail/sp_noexcept.hpp>
+	<boost/config/no_tr1/functional.hpp>
+	<iosfwd>
+	<ostream>
+	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1575937192 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/smart_ptr/intrusive_ref_counter.hpp
+	<boost/config.hpp>
+	<boost/smart_ptr/detail/atomic_count.hpp>
+	<boost/smart_ptr/detail/sp_noexcept.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/directory.hpp
+	<boost/config.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/filesystem/path.hpp>
+	<boost/filesystem/file_status.hpp>
+	<string>
+	<vector>
+	<utility>
+	<boost/assert.hpp>
+	<boost/core/scoped_enum.hpp>
+	<boost/detail/bitmask.hpp>
+	<boost/system/error_code.hpp>
+	<boost/smart_ptr/intrusive_ptr.hpp>
+	<boost/smart_ptr/intrusive_ref_counter.hpp>
+	<boost/iterator/iterator_facade.hpp>
+	<boost/iterator/iterator_categories.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/file_status.hpp
+	<boost/config.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/detail/bitmask.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937129 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/detail/bitmask.hpp
+	<boost/config.hpp>
+	<boost/cstdint.hpp>
+
+1575937127 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/core/scoped_enum.hpp
+	<boost/config.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/operations.hpp
+	<boost/config.hpp>
+	<boost/filesystem/config.hpp>
+	<boost/filesystem/path.hpp>
+	<boost/filesystem/file_status.hpp>
+	<boost/filesystem/exception.hpp>
+	<boost/filesystem/directory.hpp>
+	<boost/core/scoped_enum.hpp>
+	<boost/system/error_code.hpp>
+	<boost/cstdint.hpp>
+	<string>
+	<ctime>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/convenience.hpp
+	<boost/config.hpp>
+	<boost/filesystem/operations.hpp>
+	<boost/system/error_code.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/string_file.hpp
+	<string>
+	<boost/filesystem/fstream.hpp>
+	<boost/filesystem/operations.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/filesystem/fstream.hpp
+	<boost/config.hpp>
+	<boost/filesystem/path.hpp>
+	<iosfwd>
+	<fstream>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1575937133 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/foreach.hpp
+	<cstddef>
+	<utility>
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/assert.hpp>
+	<boost/mpl/logical.hpp>
+	<boost/mpl/eval_if.hpp>
+	<boost/noncopyable.hpp>
+	<boost/range/end.hpp>
+	<boost/range/begin.hpp>
+	<boost/range/rend.hpp>
+	<boost/range/rbegin.hpp>
+	<boost/range/iterator.hpp>
+	<boost/range/reverse_iterator.hpp>
+	<boost/type_traits/is_array.hpp>
+	<boost/type_traits/is_const.hpp>
+	<boost/type_traits/is_abstract.hpp>
+	<boost/type_traits/is_base_and_derived.hpp>
+	<boost/type_traits/is_rvalue_reference.hpp>
+	<boost/iterator/iterator_traits.hpp>
+	<boost/utility/addressof.hpp>
+	<boost/foreach_fwd.hpp>
+	<new>
+	<boost/aligned_storage.hpp>
+	<boost/utility/enable_if.hpp>
+	<boost/type_traits/remove_const.hpp>
+
+1575937206 /home/tylor/Dev/DERAS-Server/DERAS-Server/include/boost/aligned_storage.hpp
+	<boost/type_traits/aligned_storage.hpp>
 

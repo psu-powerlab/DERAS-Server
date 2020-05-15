@@ -1,3 +1,11 @@
+#include "ieee_sep/Time.h"
+#include "MySqlDatabase.h"
+#include "XercesXml.h"
+
+XercesXml XmlVal;
+
+using namespace std;
+
 //
 // Copyright (c) 2016-2019 Vinnie Falco (vinnie dot falco at gmail dot com)
 //
@@ -9,7 +17,7 @@
 
 //------------------------------------------------------------------------------
 //
-// Example: HTTP SSL server, synchronous
+// Example: HTTP SSL server, asynchronous
 //
 //------------------------------------------------------------------------------
 
@@ -19,18 +27,16 @@
 #include <boost/beast/http.hpp>
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/version.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/ssl/stream.hpp>
+#include <boost/asio/strand.hpp>
 #include <boost/config.hpp>
+#include <algorithm>
 #include <cstdlib>
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <thread>
-
-
-#include "ieee_sep/Time.h"
-#include "MySqlDatabase.h"
+#include <vector>
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -38,7 +44,6 @@ namespace net = boost::asio;            // from <boost/asio.hpp>
 namespace ssl = boost::asio::ssl;       // from <boost/asio/ssl.hpp>
 using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
-using namespace std;
 // Return a reasonable mime type based on the extension of a file.
 beast::string_view
 mime_type(beast::string_view path)
@@ -85,11 +90,20 @@ path_cat(
     if(base.empty())
         return std::string(path);
     std::string result(base);
-
+#ifdef BOOST_MSVC
+    char constexpr path_separator = '\\';
+    if(result.back() == path_separator)
+        result.resize(result.size() - 1);
+    result.append(path.data(), path.size());
+    for(auto& c : result)
+        if(c == '/')
+            c = path_separator;
+#else
     char constexpr path_separator = '/';
     if(result.back() == path_separator)
         result.resize(result.size() - 1);
     result.append(path.data(), path.size());
+#endif
     return result;
 }
 
@@ -161,18 +175,23 @@ handle_request(
     if(req.target().back() == '/')
         path.append("index.html");
 
-    // Attempt to open the file
-    beast::error_code ec;
-    http::file_body::value_type body;
-    body.open(path.c_str(), beast::file_mode::scan, ec);
+    std::string body;
+    if(req.target() == "/tm")
+    {
+        std::ostringstream oss;
+        boost::property_tree::ptree pt = Time().serialize();
+        write_xml(oss, pt);
+        body = oss.str();
 
-    // Handle the case where the file doesn't exist
-    if(ec == beast::errc::no_such_file_or_directory)
-        return send(not_found(req.target()));
-
-    // Handle an unknown error
-    if(ec)
-        return send(server_error(ec.message()));
+        if (!XmlVal.validate(body))
+        {
+            return send(server_error("Oops... cant XML that"));
+        }
+    }
+    else
+    {
+        return send(not_found(path));
+    }
 
     // Cache the size since we need it after the move
     auto const size = body.size();
@@ -189,14 +208,12 @@ handle_request(
     }
 
     // Respond to GET request
-    http::response<http::file_body> res{
-        std::piecewise_construct,
-        std::make_tuple(std::move(body)),
-        std::make_tuple(http::status::ok, req.version())};
+    http::response<http::string_body> res{http::status::ok, req.version()};
     res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
-    res.set(http::field::content_type, mime_type(path));
-    res.content_length(size);
+    res.set(http::field::content_type, "application/xml");
     res.keep_alive(req.keep_alive());
+    res.body() = body;
+    res.prepare_payload();
     return send(std::move(res));
 }
 
@@ -206,97 +223,292 @@ handle_request(
 void
 fail(beast::error_code ec, char const* what)
 {
+    // ssl::error::stream_truncated, also known as an SSL "short read",
+    // indicates the peer closed the connection without performing the
+    // required closing handshake (for example, Google does this to
+    // improve performance). Generally this can be a security issue,
+    // but if your communication protocol is self-terminated (as
+    // it is with both HTTP and WebSocket) then you may simply
+    // ignore the lack of close_notify.
+    //
+    // https://github.com/boostorg/beast/issues/38
+    //
+    // https://security.stackexchange.com/questions/91435/how-to-handle-a-malicious-ssl-tls-shutdown
+    //
+    // When a short read would cut off the end of an HTTP message,
+    // Beast returns the error beast::http::error::partial_message.
+    // Therefore, if we see a short read here, it has occurred
+    // after the message has been completed, so it is safe to ignore it.
+
+    if(ec == net::ssl::error::stream_truncated)
+        return;
+
     std::cerr << what << ": " << ec.message() << "\n";
 }
 
-// This is the C++11 equivalent of a generic lambda.
-// The function object is used to send an HTTP message.
-template<class Stream>
-struct send_lambda
-{
-    Stream& stream_;
-    bool& close_;
-    beast::error_code& ec_;
-
-    explicit
-    send_lambda(
-        Stream& stream,
-        bool& close,
-        beast::error_code& ec)
-        : stream_(stream)
-        , close_(close)
-        , ec_(ec)
-    {
-    }
-
-    template<bool isRequest, class Body, class Fields>
-    void
-    operator()(http::message<isRequest, Body, Fields>&& msg) const
-    {
-        // Determine if we should close the connection after
-        close_ = msg.need_eof();
-
-        // We need the serializer here because the serializer requires
-        // a non-const file_body, and the message oriented version of
-        // http::write only works with const messages.
-        http::serializer<isRequest, Body, Fields> sr{msg};
-        http::write(stream_, sr, ec_);
-    }
-};
-
 // Handles an HTTP server connection
-void
-do_session(
-    tcp::socket& socket,
-    ssl::context& ctx,
-    std::shared_ptr<std::string const> const& doc_root)
+class session : public std::enable_shared_from_this<session>
 {
-    bool close = false;
-    beast::error_code ec;
-
-    // Construct the stream around the socket
-    beast::ssl_stream<tcp::socket&> stream{socket, ctx};
-
-    // Perform the SSL handshake
-    stream.handshake(ssl::stream_base::server, ec);
-    if(ec)
-        return fail(ec, "handshake");
-
-    // This buffer is required to persist across reads
-    beast::flat_buffer buffer;
-
-    // This lambda is used to send messages
-    send_lambda<beast::ssl_stream<tcp::socket&>> lambda{stream, close, ec};
-
-    for(;;)
+    // This is the C++11 equivalent of a generic lambda.
+    // The function object is used to send an HTTP message.
+    struct send_lambda
     {
+        session& self_;
+
+        explicit
+        send_lambda(session& self)
+            : self_(self)
+        {
+        }
+
+        template<bool isRequest, class Body, class Fields>
+        void
+        operator()(http::message<isRequest, Body, Fields>&& msg) const
+        {
+            // The lifetime of the message has to extend
+            // for the duration of the async operation so
+            // we use a shared_ptr to manage it.
+            auto sp = std::make_shared<
+                http::message<isRequest, Body, Fields>>(std::move(msg));
+
+            // Store a type-erased version of the shared
+            // pointer in the class to keep it alive.
+            self_.res_ = sp;
+
+            // Write the response
+            http::async_write(
+                self_.stream_,
+                *sp,
+                beast::bind_front_handler(
+                    &session::on_write,
+                    self_.shared_from_this(),
+                    sp->need_eof()));
+        }
+    };
+
+    beast::ssl_stream<beast::tcp_stream> stream_;
+    beast::flat_buffer buffer_;
+    std::shared_ptr<std::string const> doc_root_;
+    http::request<http::string_body> req_;
+    std::shared_ptr<void> res_;
+    send_lambda lambda_;
+
+public:
+    // Take ownership of the socket
+    explicit
+    session(
+        tcp::socket&& socket,
+        ssl::context& ctx,
+        std::shared_ptr<std::string const> const& doc_root)
+        : stream_(std::move(socket), ctx)
+        , doc_root_(doc_root)
+        , lambda_(*this)
+    {
+    }
+
+    // Start the asynchronous operation
+    void
+    run()
+    {
+        // Set the timeout.
+        beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
+
+        // Perform the SSL handshake
+        stream_.async_handshake(
+            ssl::stream_base::server,
+            beast::bind_front_handler(
+                &session::on_handshake,
+                shared_from_this()));
+    }
+
+    void
+    on_handshake(beast::error_code ec)
+    {
+        if(ec)
+            return fail(ec, "handshake");
+
+        do_read();
+    }
+
+    void
+    do_read()
+    {
+        // Make the request empty before reading,
+        // otherwise the operation behavior is undefined.
+        req_ = {};
+
+        // Set the timeout.
+        beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
+
         // Read a request
-        http::request<http::string_body> req;
-        http::read(stream, buffer, req, ec);
+        http::async_read(stream_, buffer_, req_,
+            beast::bind_front_handler(
+                &session::on_read,
+                shared_from_this()));
+    }
+
+    void
+    on_read(
+        beast::error_code ec,
+        std::size_t bytes_transferred)
+    {
+        boost::ignore_unused(bytes_transferred);
+
+        // This means they closed the connection
         if(ec == http::error::end_of_stream)
-            break;
+            return do_close();
+
         if(ec)
             return fail(ec, "read");
 
         // Send the response
-        handle_request(*doc_root, std::move(req), lambda);
+        handle_request(*doc_root_, std::move(req_), lambda_);
+    }
+
+    void
+    on_write(
+        bool close,
+        beast::error_code ec,
+        std::size_t bytes_transferred)
+    {
+        boost::ignore_unused(bytes_transferred);
+
         if(ec)
             return fail(ec, "write");
+
         if(close)
         {
             // This means we should close the connection, usually because
             // the response indicated the "Connection: close" semantic.
-            break;
+            return do_close();
+        }
+
+        // We're done with the response so delete it
+        res_ = nullptr;
+
+        // Read another request
+        do_read();
+    }
+
+    void
+    do_close()
+    {
+        // Set the timeout.
+        beast::get_lowest_layer(stream_).expires_after(std::chrono::seconds(30));
+
+        // Perform the SSL shutdown
+        stream_.async_shutdown(
+            beast::bind_front_handler(
+                &session::on_shutdown,
+                shared_from_this()));
+    }
+
+    void
+    on_shutdown(beast::error_code ec)
+    {
+        if(ec)
+            return fail(ec, "shutdown");
+
+        // At this point the connection is closed gracefully
+    }
+};
+
+//------------------------------------------------------------------------------
+
+// Accepts incoming connections and launches the sessions
+class listener : public std::enable_shared_from_this<listener>
+{
+    net::io_context& ioc_;
+    ssl::context& ctx_;
+    tcp::acceptor acceptor_;
+    std::shared_ptr<std::string const> doc_root_;
+
+public:
+    listener(
+        net::io_context& ioc,
+        ssl::context& ctx,
+        tcp::endpoint endpoint,
+        std::shared_ptr<std::string const> const& doc_root)
+        : ioc_(ioc)
+        , ctx_(ctx)
+        , acceptor_(ioc)
+        , doc_root_(doc_root)
+    {
+        beast::error_code ec;
+
+        // Open the acceptor
+        acceptor_.open(endpoint.protocol(), ec);
+        if(ec)
+        {
+            fail(ec, "open");
+            return;
+        }
+
+        // Allow address reuse
+        acceptor_.set_option(net::socket_base::reuse_address(true), ec);
+        if(ec)
+        {
+            fail(ec, "set_option");
+            return;
+        }
+
+        // Bind to the server address
+        acceptor_.bind(endpoint, ec);
+        if(ec)
+        {
+            fail(ec, "bind");
+            return;
+        }
+
+        // Start listening for connections
+        acceptor_.listen(
+            net::socket_base::max_listen_connections, ec);
+        if(ec)
+        {
+            fail(ec, "listen");
+            return;
         }
     }
 
-    // Perform the SSL shutdown
-    stream.shutdown(ec);
-    if(ec)
-        return fail(ec, "shutdown");
+    // Start accepting incoming connections
+    void
+    run()
+    {
+        do_accept();
+    }
 
-    // At this point the connection is closed gracefully
-}
+private:
+    void
+    do_accept()
+    {
+        // The new connection gets its own strand
+        acceptor_.async_accept(
+            net::make_strand(ioc_),
+            beast::bind_front_handler(
+                &listener::on_accept,
+                shared_from_this()));
+    }
+
+    void
+    on_accept(beast::error_code ec, tcp::socket socket)
+    {
+        if(ec)
+        {
+            fail(ec, "accept");
+        }
+        else
+        {
+            // Create the session and run it
+            std::make_shared<session>(
+                std::move(socket),
+                ctx_,
+                doc_root_)->run();
+        }
+
+        // Accept another connection
+        do_accept();
+    }
+};
 
 //------------------------------------------------------------------------------
 
@@ -306,42 +518,38 @@ int main(int argc, char* argv[])
     Time clk;
     clk.Print();
     cin.get();
-    try
-    {
-        auto const address = net::ip::make_address("127.0.0.1");
-        auto const port = static_cast<unsigned short>(std::atoi("8080"));
-        auto const doc_root = std::make_shared<std::string>(".");
 
-        // The io_context is required for all I/O
-        net::io_context ioc{1};
+    auto const address = net::ip::make_address("127.0.0.1");
+    auto const port = static_cast<unsigned short>(std::atoi("8080"));
+    auto const doc_root = std::make_shared<std::string>(".");
+    auto const threads = std::max<int>(1, std::atoi(argv[4]));
 
-        // The SSL context is required, and holds certificates
-        ssl::context ctx{ssl::context::tlsv12};
+    // The io_context is required for all I/O
+    net::io_context ioc{threads};
 
-        // This holds the self-signed certificate used by the server
-        load_server_certificate(ctx);
+    // The SSL context is required, and holds certificates
+    ssl::context ctx{ssl::context::tlsv12};
 
-        // The acceptor receives incoming connections
-        tcp::acceptor acceptor{ioc, {address, port}};
-        for(;;)
+    // This holds the self-signed certificate used by the server
+    load_server_certificate(ctx);
+
+    // Create and launch a listening port
+    std::make_shared<listener>(
+        ioc,
+        ctx,
+        tcp::endpoint{address, port},
+        doc_root)->run();
+
+    // Run the I/O service on the requested number of threads
+    std::vector<std::thread> v;
+    v.reserve(threads - 1);
+    for(auto i = threads - 1; i > 0; --i)
+        v.emplace_back(
+        [&ioc]
         {
-            // This will receive the new connection
-            tcp::socket socket{ioc};
+            ioc.run();
+        });
+    ioc.run();
 
-            // Block until we get a connection
-            acceptor.accept(socket);
-
-            // Launch the session, transferring ownership of the socket
-            std::thread{std::bind(
-                &do_session,
-                std::move(socket),
-                std::ref(ctx),
-                doc_root)}.detach();
-        }
-    }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+    return EXIT_SUCCESS;
 }

@@ -45,7 +45,7 @@ http://www.codeblocks.org/downloads/26#linux
 1. Project -> Build Options... -> Linker Settings -> Other linker options: -> (-lmysqlcppconn8, -lxerces-c
 , -lxerces-c-3.2, -lpthread, -lssl, -lcrypto)
 1. Project -> Build Options... -> Search directories -> Compiler -> Add -> (include)
-1. 1. Project -> Build Options... -> Search directories -> Linker -> Add -> (lib)
+1. Project -> Build Options... -> Search directories -> Linker -> Add -> (lib)
 
 
 ## Resources

@@ -5,6 +5,12 @@ Distributed Energy Resource Aggregation System
 
 After building the following sources, I moved their respective "include" and "lib" files into the project repository so that at the very lease what I used would be clear. 
 
+### OpenSSL
+
+https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
+
+Specifically the Generate a Self-Signed Certificate section to be used by server for now.
+
 ### Xerces-C++
 
 http://xerces.apache.org/xerces-c/build-3.html

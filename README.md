@@ -9,7 +9,11 @@ After building the following sources, I moved their respective "include" and "li
 
 https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
 
-Specifically the Generate a Self-Signed Certificate section to be used by server for now.
+Specifically the Generate a Self-Signed Certificate section to be used by server for now. Also you will need to generate a dh.pem file which can be achieved using the following terminal command.
+
+``` bash
+openssl dhparam -out dh.pem 2048
+```
 
 ### Xerces-C++
 

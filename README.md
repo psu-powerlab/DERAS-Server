@@ -3,13 +3,17 @@ Distributed Energy Resource Aggregation System
 
 ## Dependencies
 
-After building the following sources, I moved their respective "include" and "lib" files into the project repository so that at the very lease what I used would be clear. 
+After building the following sources, I moved their respective "include" and "lib" files into the project repository so that at the very lease what I used would be clear.
+
+Linux - Ubuntu 18.04 x86_64 
 
 ### OpenSSL
 
 https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
 
 Specifically the Generate a Self-Signed Certificate section to be used by server for now. Also you will need to generate a dh.pem file which can be achieved using the following terminal command.
+
+https://www.feistyduck.com/library/openssl-cookbook/online/
 
 ``` bash
 openssl dhparam -out dh.pem 2048
@@ -24,6 +28,10 @@ http://xerces.apache.org/xerces-c/build-3.html
 https://www.boost.org/doc/libs/1_73_0/more/getting_started/unix-variants.html
 
 Specifically the source must be build from some programs. Refere to Section 5 "Prepare to Use a Boost Library Binary".
+
+### Certify
+
+https://github.com/djarek/certify/blob/master/doc/certify/getting_started.adoc
 
 ### IEEE 2030.5 Models
 

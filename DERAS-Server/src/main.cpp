@@ -1,11 +1,12 @@
 #include "ieee_sep/Time.h"
 #include "MySqlDatabase.h"
 #include "XercesXml.h"
-
+#include "tests/TimeTest.h"
 XercesXml XmlVal;
 
 using namespace std;
 
+#define TIME_TEST true
 //
 // Copyright (c) 2016-2019 Vinnie Falco (vinnie dot falco at gmail dot com)
 //
@@ -514,6 +515,12 @@ private:
 
 int main(int argc, char* argv[])
 {
+
+    if(TIME_TEST)
+    {
+        TimeTest::main();
+        return 0;
+    }
     MySqlDatabase MySqlDB("127.0.0.1", 33060);
     Time clk;
     clk.Print();

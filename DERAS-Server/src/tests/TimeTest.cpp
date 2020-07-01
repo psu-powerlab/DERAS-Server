@@ -3,21 +3,7 @@
 //#define BOOST_TEST_DYN_LINK
 
 #include "tests/TimeTest.h"
-/*#include <boost/test/unit_test.hpp>
-using namespace boost::unit_test;
 
-
-BOOST_AUTO_TEST_CASE(test_current_time)
-{
-    Time time;
-    std::cout<<"here"<<std::endl;
-    //BOOST_CHECK(T)
-    //cout<<time.currentTime()<<endl;
-}
-
-//BOOST_AUTO_TEST_SUITE_END()
-
-*/
 namespace TimeTest{
     void Current_Time_Test()
     {
@@ -31,29 +17,69 @@ namespace TimeTest{
         t1.currentTime<t3? cout<<"PASS\n":cout<<"FAIL\n";
         return;
     }
+    void Dst_Test(time_t time, int isdst, bool isDstStart)
+    {
+        tm* local = localtime(&time);
+        char* str = ctime(&time);
+        int expected_wday,expected_mon,expected_start,expected_end;
+
+        // if start: month should be 2 && day should be between 8 and 14 (inclusive)
+        // else: month should be 10 && day should be between 1 and 7 (inclusive)
+        if (isDstStart)
+        {
+            expected_mon = 2;
+            expected_start = 8;
+            expected_end = 14;
+        }
+        else
+        {
+            expected_mon = 10;
+            expected_start = 1;
+            expected_end = 7;
+        }
+        expected_wday = 0; // dst always occur on sunday
+        cout<<"testing DST for: "<<str<<endl;
+
+        // --- test month -----
+        cout<<"TEST DST MONTH: "<<local->tm_mon<<" == "<<expected_mon<<endl; // should be equal to expected month
+        local->tm_mon==expected_mon? cout<<"PASS\n":cout<<"FAIL\n";
+
+        // --- test day -----
+        cout<<"TEST DST DAY (since sunday): "<<local->tm_wday<<" == "<<expected_wday<<endl; // because Sunday = 0
+        local->tm_wday==expected_wday? cout<<"PASS\n":cout<<"FAIL\n";
+
+        cout<<"TEST DST DAY (ordinal day): "<<expected_start<<" <= "<<local->tm_mday<<" <= "<<expected_end<<endl; // should be within range of expected start/end
+        (local->tm_mday>=expected_start&&local->tm_mday<=expected_end)? cout<<"PASS\n":cout<<"FAIL\n";
+
+        // --- test dst -----
+        cout<<"TEST IS DST: "<<local->tm_isdst<<" == "<<isdst<<endl; // because Sunday = 0
+        local->tm_isdst==isdst? cout<<"PASS\n":cout<<"FAIL\n";
+
+
+    }
     void Dst_Time_Test()
     {
         Time t;
         time_t tmStart = t.dstStartTime;
         time_t tmEnd = t.dstEndTime;
 
+        cout<<"----> test DST start..."<<t.dstStartTime<<endl;
 
-        cout<<t.dstStartTime<<" to --> "<<t.dstEndTime<<endl;
-        // calculate start
-        tm* localStart = localtime(&tmStart);
-        // just to make it human readable only
-        stringstream st,en;
-        st<<std::put_time(localStart,"%c\n");
-        cout<<st.str()<<endl; // ISSUE HERE ---- should be [March 8th - March 14th] (second Sunday in March)
-        cout<<"Week day ( Sun = 0 & Sat = 6): "<<localStart->tm_wday<<endl;
-        cout<<"Month: "<<localStart->tm_mon+1<<endl<<endl<<endl;;
+        // test one sec before
+        Dst_Test(tmStart-1,0,true);// ISSUE HERE ---- should be [March 8th - March 14th] (second Sunday in March)
+        // test exact time
+        Dst_Test(tmStart,1,true);
+        // test one sec after
+        Dst_Test(tmStart+1,1,true);
 
-        // calculate end
-        tm* localEnd = localtime(& tmEnd);
-        en<<std::put_time(localEnd, "%c\n");
-        cout<<en.str()<<endl; // ISSUE HERE ---- should be [Nov 1 th - Nov 7th] (first Sunday in November)
-        cout<<"Week day ( Sun = 0 & Sat = 6): "<<localEnd->tm_wday<<endl;
-        cout<<"Month: "<<localEnd->tm_mon + 1<<endl;
+        cout<<"----> test DST end..."<<t.dstEndTime<<endl;
+
+        // test one sec before
+        Dst_Test(tmEnd-1,1,false);// ISSUE HERE ---- should be [Nov 1 th - Nov 7th] (first Sunday in November)
+        // test exact time
+        Dst_Test(tmEnd,0,false);
+        // test one sec after
+        Dst_Test(tmEnd+1,0,false);
 
         // Might be off-by-one error in boost?
 

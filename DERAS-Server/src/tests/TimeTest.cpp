@@ -72,7 +72,6 @@ namespace TimeTest{
         // test one sec after
         Dst_Test(tmStart+1,1,true);
 
-        cout<<"----> test DST end..."<<t.dstEndTime<<endl;
 
         // test one sec before
         Dst_Test(tmEnd-1,1,false);// ISSUE HERE ---- should be [Nov 1 th - Nov 7th] (first Sunday in November)
@@ -82,7 +81,12 @@ namespace TimeTest{
         Dst_Test(tmEnd+1,0,false);
 
         // Might be off-by-one error in boost?
+        // Test DST offset
+        // --- test dst -----
+        cout<<"TEST DST OFFSET: "<<t.dstOffset<<" == 0"<<" || "<<t.dstOffset<<" == 3600"<<endl;
+        t.dstOffset==0 || t.dstOffset == 3600? cout<<"PASS\n":cout<<"FAIL\n";
 
+        cout<<"----> test DST end..."<<t.dstEndTime<<endl;
     }
     void Quality_Test()
     {

@@ -16,6 +16,8 @@ MySqlDatabase::MySqlDatabase(const std::string& ip, const unsigned int port)
         std::cout << schema.getName() << std::endl;
     }
 
+    std::string create_db = R"(create database if not exists deras;)";
+
     std::string create_table = R"(
         CREATE TABLE IF NOT EXISTS deras.tasks (
             task_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -28,6 +30,7 @@ MySqlDatabase::MySqlDatabase(const std::string& ip, const unsigned int port)
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     )";
+    session_->sql(create_db).execute();
 
     session_->sql(create_table).execute();
 }

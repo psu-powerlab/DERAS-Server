@@ -37,7 +37,7 @@ Time::Time() : Resource("\\tm"), pollRate(900)
     dstStartTime = to_time_t(pst_tz->dst_local_start_time(ldt.date().year()));
     localTime = to_time_t(lt);
     quality = 7;
-    tzOffset = (pst_tz->base_utc_offset()).total_seconds();
+    tzOffset = localTime-currentTime;
 
     #ifdef TEST
         Time::Print();
@@ -63,7 +63,6 @@ boost::property_tree::ptree Time::serialize()
     pt.put("Time.dstStartTime", dstStartTime);
     pt.put("Time.localTime", localTime);
     pt.put("Time.quality", quality);
-    pt.put("Time.quality2", quality);
     pt.put("Time.tzOffset", tzOffset);
     return pt;
 }

@@ -27,7 +27,7 @@ Time::Time() : Resource("\\tm"), pollRate(900)
     //setup some timezones for creating and adjusting times
     //first time zone uses the time zone file for regional timezone definitions
     tz_database tz_db;
-    tz_db.load_from_file("doc/date_time_zonespec.csv");
+    tz_db.load_from_file("../../doc/date_time_zonespec.csv");
     time_zone_ptr pst_tz = tz_db.time_zone_from_region("America/Los_Angeles");
     local_date_time ldt(lt,pst_tz);
 

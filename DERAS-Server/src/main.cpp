@@ -6,7 +6,7 @@ XercesXml XmlVal;
 
 using namespace std;
 
-#define TIME_TEST true
+#define TIME_TEST false
 //
 // Copyright (c) 2016-2019 Vinnie Falco (vinnie dot falco at gmail dot com)
 //
